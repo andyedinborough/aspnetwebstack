@@ -28,6 +28,11 @@ namespace System.Web.Mvc
 
             while (part != null)
             {
+                if (part.NodeType == ExpressionType.Convert)
+                {
+                    part = ((UnaryExpression)part).Operand;
+                }
+                
                 if (part.NodeType == ExpressionType.Call)
                 {
                     MethodCallExpression methodExpression = (MethodCallExpression)part;
